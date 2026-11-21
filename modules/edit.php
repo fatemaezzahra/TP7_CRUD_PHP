@@ -3,19 +3,16 @@ require_once '../database/connexion.php';
 
 $id = $_GET['id'];
 
-// Récupérer le module
-$sql = "SELECT * FROM modules WHERE id_module = ?";
+$sql = "SELECT * FROM modules WHERE id_module = ?";  // Récupérer le module
 $stmt = $pdo->prepare($sql);
 $stmt->execute([$id]);
 $module = $stmt->fetch(PDO::FETCH_ASSOC);
 
-// Récupérer les formations
-$sql = "SELECT * FROM formations";
+$sql = "SELECT * FROM formations";  // Récupérer les formations
 $stmt = $pdo->query($sql);
 $formations = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// Modifier le module
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {  // Modifier le module
     $nom_module = $_POST['nom_module'];
     $coefficient = $_POST['coefficient'];
     $id_formation = $_POST['id_formation'];

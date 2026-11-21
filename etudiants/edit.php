@@ -3,19 +3,16 @@ require_once '../database/connexion.php';
 
 $id = $_GET['id'];
 
-// Récupérer l'étudiant
-$sql = "SELECT * FROM etudiants WHERE id_etudiant = ?";
+$sql = "SELECT * FROM etudiants WHERE id_etudiant = ?";  // Récupérer l'étudiant
 $stmt = $pdo->prepare($sql);
 $stmt->execute([$id]);
 $etudiant = $stmt->fetch(PDO::FETCH_ASSOC);
 
-// Récupérer les formations
-$sql = "SELECT * FROM formations";
+$sql = "SELECT * FROM formations"; // Récupérer les formations
 $stmt = $pdo->query($sql);
 $formations = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// Modifier l'étudiant
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {  // Modifier l'étudiant
     $nom = $_POST['nom'];
     $prenom = $_POST['prenom'];
     $email = $_POST['email'];

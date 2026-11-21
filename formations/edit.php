@@ -1,16 +1,14 @@
 <?php
 require_once '../database/connexion.php';
 
-// Récupérer la formation à modifier
-$id = $_GET['id'];
+$id = $_GET['id'];  // Récupérer la formation à modifier
 
 $sql = "SELECT * FROM formations WHERE id_formation = ?";
 $stmt = $pdo->prepare($sql);
 $stmt->execute([$id]);
 $formation = $stmt->fetch(PDO::FETCH_ASSOC);
 
-// Modifier la formation
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {  // Modifier la formation
     $nom = $_POST['nom_formation'];
     $description = $_POST['description'];
     $duree = $_POST['duree'];

@@ -1,13 +1,11 @@
 <?php
 require_once '../database/connexion.php';
 
-// Récupérer les formations
-$sql = "SELECT * FROM formations";
+$sql = "SELECT * FROM formations";  // Récupérer les formations
 $stmt = $pdo->query($sql);
 $formations = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// Ajouter un module
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {  // Ajouter un module
     $nom_module = $_POST['nom_module'];
     $coefficient = $_POST['coefficient'];
     $id_formation = $_POST['id_formation'];

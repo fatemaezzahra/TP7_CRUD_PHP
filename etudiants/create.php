@@ -1,14 +1,11 @@
-
 <?php
 require_once '../database/connexion.php';
 
-// Récupérer les formations
-$sql = "SELECT * FROM formations";
+$sql = "SELECT * FROM formations";  // Récupérer les formations
 $stmt = $pdo->query($sql);
 $formations = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// Ajouter un étudiant
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {  // Ajouter un étudiant
 
     $nom = $_POST['nom'];
     $prenom = $_POST['prenom'];
