@@ -14,38 +14,60 @@ $modules = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Liste des modules</title>
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
 
-    <h1>Liste des modules</h1>
+    <nav>
+        <h2>Centre de Formation</h2>
+        <div>
+            <a href="../index.php">Accueil</a>
+            <a href="../formations/index.php">Formations</a>
+            <a href="../etudiants/index.php">Étudiants</a>
+            <a href="index.php">Modules</a>
+        </div>
+    </nav>
 
-    <a href="create.php">Ajouter un module</a>
+    <div class="container">
+        <h1>Liste des modules</h1>
 
-    <table border="1" cellpadding="10">
-        <tr>
-            <th>ID</th>
-            <th>Nom du module</th>
-            <th>Coefficient</th>
-            <th>Formation</th>
-            <th>Actions</th>
-        </tr>
+        <p>Consulter et gérer les modules de formations disponibles dans notre centre.</p>
 
-        <?php foreach ($modules as $module): ?>
-        <tr>
-            <td><?= $module['id_module'] ?></td>
-            <td><?= htmlspecialchars($module['nom_module']) ?></td>
-            <td><?= $module['coefficient'] ?></td>
-            <td><?= htmlspecialchars($module['nom_formation']) ?></td>
-            <td>
-                <a href="edit.php?id=<?= $module['id_module'] ?>">Modifier</a>
-                |
-                <a href="delete.php?id=<?= $module['id_module'] ?>">Supprimer</a>
-            </td>
-        </tr>
-        <?php endforeach; ?>
+        <br>
 
-    </table>
+        <a href="create.php" class="btn">Ajouter un module</a>
+
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Nom du module</th>
+                <th>Coefficient</th>
+                <th>Formation</th>
+                <th>Actions</th>
+            </tr>
+
+            <?php if (count($modules) > 0): ?>
+                <?php foreach ($modules as $module): ?>
+                    <tr>
+                        <td><?= $module['id_module'] ?></td>
+                        <td><?= htmlspecialchars($module['nom_module']) ?></td>
+                        <td><?= htmlspecialchars($module['coefficient'] ?? '') ?></td>
+                        <td><?= htmlspecialchars($module['nom_formation']) ?></td>
+                        <td>
+                            <a href="edit.php?id=<?= $module['id_module'] ?>" class="btn btn-edit">Modifier</a>
+                            <a href="delete.php?id=<?= $module['id_module'] ?>" class="btn btn-delete">Supprimer</a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <tr>
+                    <td colspan="5">Aucun module enregistré.</td>
+                </tr>
+            <?php endif; ?>
+        </table>
+    </div>
 
 </body>
 </html>

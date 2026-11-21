@@ -1,3 +1,4 @@
+
 <?php
 require_once '../database/connexion.php';
 
@@ -22,32 +23,45 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ajouter une formation</title>
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
 
-    <h1>Ajouter une formation</h1>
+    <nav>
+        <h2>Centre de Formation</h2>
+        <div>
+            <a href="../index.php">Accueil</a>
+            <a href="index.php">Formations</a>
+            <a href="../etudiants/index.php">Étudiants</a>
+            <a href="../modules/index.php">Modules</a>
+        </div>
+    </nav>
 
-    <form method="POST">
+    <div class="container">
 
-        <label>Nom de la formation :</label>
-        <input type="text" name="nom_formation" required>
-        <br><br>
+        <h1>Ajouter une formation</h1>
 
-        <label>Description :</label>
-        <textarea name="description"></textarea>
-        <br><br>
+        <form method="POST">
 
-        <label>Durée (mois) :</label>
-        <input type="number" name="duree">
-        <br><br>
+            <label>Nom de la formation :</label>
+            <input type="text" name="nom_formation" placeholder="Ex : Génie Informatique" required>
 
-        <button type="submit">Ajouter</button>
+            <label>Description :</label>
+            <textarea name="description" rows="4" placeholder="Description de la formation"></textarea>
 
-    </form>
+            <label>Durée (mois) :</label>
+            <input type="number" name="duree" min="1" placeholder="Ex : 24">
 
-    <br>
-    <a href="index.php">Retour à la liste</a>
+            <br><br>
+
+            <button type="submit">Ajouter la formation</button>
+            <a href="index.php" class="btn btn-delete">Annuler</a>
+
+        </form>
+
+    </div>
 
 </body>
 </html>

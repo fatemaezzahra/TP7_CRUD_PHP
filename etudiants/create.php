@@ -1,11 +1,11 @@
 <?php
 require_once '../database/connexion.php';
 
-$sql = "SELECT * FROM formations";  // Récupérer les formations
+$sql = "SELECT * FROM formations";
 $stmt = $pdo->query($sql);
 $formations = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {  // Ajouter un étudiant
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $nom = $_POST['nom'];
     $prenom = $_POST['prenom'];
@@ -27,43 +27,54 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {  // Ajouter un étudiant
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ajouter un étudiant</title>
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
 
-    <h1>Ajouter un étudiant</h1>
+    <nav>
+        <h2>Centre de Formation</h2>
+        <div>
+            <a href="../index.php">Accueil</a>
+            <a href="../formations/index.php">Formations</a>
+            <a href="index.php">Étudiants</a>
+            <a href="../modules/index.php">Modules</a>
+        </div>
+    </nav>
 
-    <form method="POST">
+    <div class="container">
 
-        <label>Nom :</label>
-        <input type="text" name="nom" required>
-        <br><br>
+        <h1>Ajouter un étudiant</h1>
 
-        <label>Prénom :</label>
-        <input type="text" name="prenom" required>
-        <br><br>
+        <form method="POST">
 
-        <label>Email :</label>
-        <input type="email" name="email">
-        <br><br>
+            <label>Nom :</label>
+            <input type="text" name="nom" placeholder="Nom de l'étudiant" required>
 
-        <label>Formation :</label>
-        <select name="id_formation" required>
-            <?php foreach ($formations as $formation): ?>
-                <option value="<?= $formation['id_formation'] ?>">
-                    <?= htmlspecialchars($formation['nom_formation']) ?>
-                </option>
-            <?php endforeach; ?>
-        </select>
+            <label>Prénom :</label>
+            <input type="text" name="prenom" placeholder="Prénom de l'étudiant" required>
 
-        <br><br>
+            <label>Email :</label>
+            <input type="email" name="email" placeholder="exemple@email.com">
 
-        <button type="submit">Ajouter</button>
+            <label>Formation :</label>
+            <select name="id_formation" required>
+                <?php foreach ($formations as $formation): ?>
+                    <option value="<?= $formation['id_formation'] ?>">
+                        <?= htmlspecialchars($formation['nom_formation']) ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
 
-    </form>
+            <br><br>
 
-    <br>
-    <a href="index.php">Retour à la liste</a>
+            <button type="submit">Ajouter l'étudiant</button>
+            <a href="index.php" class="btn btn-delete">Annuler</a>
+
+        </form>
+
+    </div>
 
 </body>
 </html>

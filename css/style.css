@@ -1,0 +1,188 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background-color: #f5f1eb;
+    color: #33251f;
+    line-height: 1.6;
+}
+
+
+nav {
+    background-color: #3d2b24;
+    padding: 18px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav h2 {
+    color: white;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #e8b98b;
+}
+
+
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 35px auto;
+}
+
+.container > h1 {
+    text-align: center;
+}
+
+h1 {
+    color: #3d2b24;
+    margin-bottom: 25px;
+}
+
+h2 {
+    margin-bottom: 15px;
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    margin-top: 20px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 25px auto;
+}
+
+th {
+    background-color: #3d2b24;
+    color: white;
+    padding: 14px;
+    text-align: left;
+}
+
+td {
+    padding: 13px;
+    border-bottom: 1px solid #eee2d8;
+}
+
+tr:hover td {
+    background-color: #faf5ef;
+}
+
+
+form {
+    background-color: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+    max-width: 650px;
+    margin: 25px auto;
+}
+
+label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 6px;
+    font-weight: bold;
+}
+
+input, textarea, select {
+    width: 100%;
+    padding: 11px;
+    border: 1px solid #d8c9bd;
+    border-radius: 6px;
+    font-size: 15px;
+    background-color: #fff;
+}
+
+input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: #a66b43;
+}
+
+
+.btn, button {
+    display: inline-block;
+    padding: 10px 17px;
+    border: none;
+    border-radius: 6px;
+    background-color: #79513a;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 14px;
+    margin: 5px 3px;
+}
+
+.btn:hover, button:hover {
+    background-color: #513526;
+}
+
+.btn-edit {
+    background-color: #226949;
+}
+
+.btn-delete {
+    background-color: #a7342c;
+}
+
+.btn-edit:hover {
+    background-color: #226949;
+}
+
+.btn-delete:hover {
+    background-color: #a7342c;
+}
+
+
+.success {
+    background-color: #d9f0df;
+    color: #226949;
+    padding: 12px;
+    border-radius: 6px;
+    margin: 15px 0;
+}
+
+.error {
+    background-color: #f8dddd;
+    color: #a7342c;
+    padding: 12px;
+    border-radius: 6px;
+    margin: 15px 0;
+}
+
+
+.cards {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 25px;
+}
+
+.card {
+    background-color: white;
+    padding: 25px;
+    border-radius: 10px;
+    flex: 1;
+    min-width: 220px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+}
+
+.card a {
+    display: inline-block;
+    margin-top: 15px;
+}

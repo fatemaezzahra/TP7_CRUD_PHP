@@ -3,16 +3,21 @@ require_once '../database/connexion.php';
 
 $id = $_GET['id'];
 
-$sql = "SELECT * FROM etudiants WHERE id_etudiant = ?";  // Récupérer l'étudiant
+$sql = "SELECT * FROM etudiants WHERE id_etudiant = ?";
 $stmt = $pdo->prepare($sql);
 $stmt->execute([$id]);
 $etudiant = $stmt->fetch(PDO::FETCH_ASSOC);
 
-$sql = "SELECT * FROM formations"; // Récupérer les formations
+if (!$etudiant) {
+    die("Étudiant introuvable.");
+}
+
+$sql = "SELECT * FROM formations";
 $stmt = $pdo->query($sql);
 $formations = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {  // Modifier l'étudiant
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
     $nom = $_POST['nom'];
     $prenom = $_POST['prenom'];
     $email = $_POST['email'];
@@ -34,43 +39,58 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {  // Modifier l'étudiant
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modifier un étudiant</title>
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
 
-    <h1>Modifier un étudiant</h1>
+    <nav>
+        <h2>Centre de Formation</h2>
+        <div>
+            <a href="../index.php">Accueil</a>
+            <a href="../formations/index.php">Formations</a>
+            <a href="index.php">Étudiants</a>
+            <a href="../modules/index.php">Modules</a>
+        </div>
+    </nav>
 
-    <form method="POST">
-        <label>Nom :</label>
-        <input type="text" name="nom"
-               value="<?= htmlspecialchars($etudiant['nom']) ?>" required>
-        <br><br>
+    <div class="container">
 
-        <label>Prénom :</label>
-        <input type="text" name="prenom"
-               value="<?= htmlspecialchars($etudiant['prenom']) ?>" required>
-        <br><br>
+        <h1>Modifier un étudiant</h1>
 
-        <label>Email :</label>
-        <input type="email" name="email"
-               value="<?= htmlspecialchars($etudiant['email'] ?? '') ?>">
-        <br><br>
+        <form method="POST">
 
-        <label>Formation :</label>
-        <select name="id_formation" required>
-            <?php foreach ($formations as $formation): ?>
-                <option value="<?= $formation['id_formation'] ?>"
-                    <?= $formation['id_formation'] == $etudiant['id_formation'] ? 'selected' : '' ?>>
-                    <?= htmlspecialchars($formation['nom_formation']) ?>
-                </option>
-            <?php endforeach; ?>
-        </select>
+            <label>Nom :</label>
+            <input type="text" name="nom"
+                   value="<?= htmlspecialchars($etudiant['nom']) ?>" required>
 
-        <br><br>
-        <button type="submit">Enregistrer les modifications</button>
-    </form>
+            <label>Prénom :</label>
+            <input type="text" name="prenom"
+                   value="<?= htmlspecialchars($etudiant['prenom']) ?>" required>
 
-    <br><a href="index.php">Retour à la liste</a>
+            <label>Email :</label>
+            <input type="email" name="email"
+                   value="<?= htmlspecialchars($etudiant['email'] ?? '') ?>">
+
+            <label>Formation :</label>
+            <select name="id_formation" required>
+                <?php foreach ($formations as $formation): ?>
+                    <option value="<?= $formation['id_formation'] ?>"
+                        <?= $formation['id_formation'] == $etudiant['id_formation'] ? 'selected' : '' ?>>
+                        <?= htmlspecialchars($formation['nom_formation']) ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+
+            <br><br>
+
+            <button type="submit">Enregistrer les modifications</button>
+            <a href="index.php" class="btn btn-delete">Annuler</a>
+
+        </form>
+
+    </div>
 
 </body>
 </html>
